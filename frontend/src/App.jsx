@@ -8,15 +8,15 @@ function App() {
 
       <main className="p-8">
         <h1 className="text-3xl font-bold">
-          Welcome to my website!
+          Üdv az XYZ Könyvtár oldalán!
         </h1>
 
         <p className="mt-4 text-gray-500">
-          Built with React, Tailwind CSS and DaisyUI.
+          asd
         </p>
 
         <button className="btn btn-primary mt-6">
-          Get Started
+          Könyv kölcsönzés
         </button>
       </main>
     </div>

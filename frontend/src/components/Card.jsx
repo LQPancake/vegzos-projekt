@@ -1,13 +1,37 @@
-export default function Card({name, price, description, kepUrl, onCardDelete, onCardEdit}){
-    return(
+
+export default function Card({
+    cim,
+    szerzo,
+    kiadas_eve,
+    kategoria,
+    ar,
+    onCardDelete,
+    onCardEdit
+}) {
+    return (
         <div className="card">
-            <img src={kepUrl} alt="Könyv" />
-            <h2>{name}</h2>
-            <h3>{price}</h3>
-            <p>{description}</p>
+            <h2>{cim}</h2>
+            <p>{szerzo}</p>
+            <p>{kiadas_eve}</p>
+            <p>{kategoria}</p>
+            <p>{ar}</p>
+
             <p>
-                <button className="icon-button" onClick={onCardEdit}>EDIT</button>
-                <button className="icon-button" onClick={onCardDelete}>DEL</button>
+                <button
+                    className="btn btn-primary mt-6"
+                    type="button"
+                    onClick={onCardEdit}
+                >
+                    EDIT
+                </button>
+
+                <button
+                    className="btn btn-primary mt-6"
+                    type="button"
+                    onClick={onCardDelete}
+                >
+                    DEL
+                </button>
             </p>
         </div>
     )

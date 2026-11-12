@@ -1,26 +1,68 @@
-export default function Form({newBook, setNewBook, submitHandler}) {
-
+export default function Form({ newBook, setNewBook, submitHandler }) {
     return (
         <form onSubmit={submitHandler}>
             <div>
                 <div>
-                    <label htmlFor="name">Név:</label>
-                    <input type="text" id="name"  value={newBook.name} onChange={e => setNewBook({...newBook, name: e.target.value})}/>
+                    <label htmlFor="cim">Cím:</label>
+                    <input
+                        type="text"
+                        id="cim"
+                        value={newBook.cim}
+                        onChange={e => setNewBook({...newBook, cim: e.target.value})}
+                        required
+                    />
                 </div>
+
                 <div>
-                    <label htmlFor="price">Ár:</label>
-                    <input type="text" id="price" value={newBook.price} onChange={e => setNewBook({...newBook, price: e.target.value})}/>
+                    <label htmlFor="szerzo">Szerző:</label>
+                    <input
+                        type="text"
+                        id="szerzo"
+                        value={newBook.szerzo}
+                        onChange={e => setNewBook({...newBook, szerzo: e.target.value})}
+                        required
+                    />
                 </div>
+
                 <div>
-                    <label htmlFor="description">Leírás:</label>
-                    <input type="text" id="description" value={newBook.description} onChange={e => setNewBook({...newBook, description: e.target.value})}/>
+                    <label htmlFor="kiadas_eve">Kiadás éve:</label>
+                    <input
+                        type="number"
+                        id="kiadas_eve"
+                        value={newBook.kiadas_eve}
+                        onChange={e => setNewBook({...newBook, kiadas_eve: e.target.value})}
+                        required
+                    />
                 </div>
-                <label htmlFor="kepUrl">Kép:</label>
-                <input type="text" id="kepUrl" name="kepUrl" value={newBook.kepUrl} onChange={e => setNewBook({...newBook, kepUrl: e.target.value})}/>
-                </div>
+
                 <div>
-                    <button className="btn btn-primary mt-6" type="submit">Hozzáadás</button>
+                    <label htmlFor="kategoria">Kategória:</label>
+                    <input
+                        type="text"
+                        id="kategoria"
+                        value={newBook.kategoria}
+                        onChange={e => setNewBook({...newBook, kategoria: e.target.value})}
+                        required
+                    />
                 </div>
+
+                <div>
+                    <label htmlFor="ar">Ár:</label>
+                    <input
+                        type="number"
+                        id="ar"
+                        value={newBook.ar}
+                        onChange={e => setNewBook({...newBook, ar: e.target.value})}
+                        required
+                    />
+                </div>
+            </div>
+
+            <div>
+                <button className="btn btn-primary mt-6" type="submit">
+                    Hozzáadás
+                </button>
+            </div>
         </form>
-    )
+    );
 }

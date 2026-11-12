@@ -32,7 +32,7 @@ app.get('/konyvek/:id', async (req, res) => {
 
 // Új könyv hozzáadása
 app.post('/konyvek', async (req, res) => {
-    const { cim, szerzo, kiadas_eve, ar } = req.body;
+    const { cim, szerzo, kiadas_eve, kategoria, ar } = req.body;
     if (!cim || !szerzo) {
         return res.status(400).json({ error: 'A cím és a szerző mezők kötelezőek' });
     }

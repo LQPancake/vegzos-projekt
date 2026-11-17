@@ -7,76 +7,76 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Összes könyv
-app.get('/konyvek', async (req, res) => {
+// Get all books
+app.get('/books', async (req, res) => {
     try {
-        const [sorok] = await pool.query('SELECT * FROM konyvek');
-        res.json(sorok);
+        const [rows] = await pool.query('SELECT * FROM books');
+        res.json(rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 })
 
-// Egy könyv ID alapján
-app.get('/konyvek/:id', async (req, res) => {
+// Get a book by ID
+app.get('/books/:id', async (req, res) => {
     try {
-        const [sorok] = await pool.query('SELECT * FROM konyvek WHERE id = ?', [req.params.id]);
-        if (sorok.length === 0) {
-            return res.status(404).json({ error: 'Könyv nem található' });
+        const [rows] = await pool.query('SELECT * FROM books WHERE id = ?', [req.params.id]);
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'Book not found' });
         }
-        res.json(sorok[0]);
+        res.json(rows[0]);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
-// Új könyv hozzáadása
-app.post('/konyvek', async (req, res) => {
-    const { cim, szerzo, kiadas_eve, kategoria, ar } = req.body;
-    if (!cim || !szerzo) {
-        return res.status(400).json({ error: 'A cím és a szerző mezők kötelezőek' });
+// Create a new book
+app.post('/books', async (req, res) => {
+    const { title, author, published_year, category, price } = req.body;
+    if (!title || !author) {
+        return res.status(400).json({ error: 'The title and author fields are required' });
     }
     try {
-        const [eredmeny] = await pool.query('INSERT INTO konyvek (cim, szerzo, kiadas_eve, kategoria, ar) VALUES (?, ?, ?, ?, ?)',
-      [cim, szerzo, kiadas_eve || null, kategoria || null, ar || 0]);
-      res.status(201).json({ id: eredmeny.insertId, cim, szerzo, kiadas_eve, kategoria, ar });
+        const [result] = await pool.query('INSERT INTO books (title, author, published_year, category, price) VALUES (?, ?, ?, ?, ?)',
+      [title, author, published_year || null, category || null, price || 0]);
+      res.status(201).json({ id: result.insertId, title, author, published_year, category, price });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
-// Könyv módosítása
-app.put('/konyvek/:id', async (req, res) => {
-  const { cim, szerzo, kiadas_eve, kategoria, ar } = req.body;
-  if (!cim || !szerzo) {
-    return res.status(400).json({ hiba: 'A cím és a szerző megadása kötelező' });
+// Update a book
+app.put('/books/:id', async (req, res) => {
+  const { title, author, published_year, category, price } = req.body;
+  if (!title || !author) {
+    return res.status(400).json({ error: 'The title and author fields are required' });
   }
   try {
-    const [eredmeny] = await pool.query(
-      'UPDATE konyvek SET cim = ?, szerzo = ?, kiadas_eve = ?, kategoria = ?, ar = ? WHERE id = ?',
-      [cim, szerzo, kiadas_eve || null, kategoria || null, ar || 0, req.params.id]
+    const [result] = await pool.query(
+      'UPDATE books SET title = ?, author = ?, published_year = ?, category = ?, price = ? WHERE id = ?',
+      [title, author, published_year || null, category || null, price || 0, req.params.id]
     );
-    if (eredmeny.affectedRows === 0) {
-      return res.status(404).json({ hiba: 'A könyv nem található' });
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'The book was not found' });
     }
-    res.json({ id: Number(req.params.id), cim, szerzo, kiadas_eve, kategoria, ar });
+    res.json({ id: Number(req.params.id), title, author, published_year, category, price });
   } catch (err) {
-    res.status(500).json({ hiba: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Könyv törlése
-app.delete('/konyvek/:id', async (req, res) => {
+// Delete a book
+app.delete('/books/:id', async (req, res) => {
   try {
-    const [eredmeny] = await pool.query('DELETE FROM konyvek WHERE id = ?', [req.params.id]);
-    if (eredmeny.affectedRows === 0) {
-      return res.status(404).json({ hiba: 'A könyv nem található' });
+    const [result] = await pool.query('DELETE FROM books WHERE id = ?', [req.params.id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'The book was not found' });
     }
-    res.json({ uzenet: 'A könyv törölve' });
+    res.json({ message: 'The book has been deleted' });
   } catch (err) {
-    res.status(500).json({ hiba: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`A szerver fut: http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`The server is running: http://localhost:${PORT}`));

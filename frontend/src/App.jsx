@@ -12,15 +12,15 @@ function App() {
   const [editedId, setEditedId] = useState(null);
 
   const [newBook, setNewBook] = useState({
-    cim: "",
-    szerzo: "",
-    kiadas_eve: "",
-    kategoria: "",
-    ar: ""
+    title: "",
+    author: "",
+    published_year: "",
+    category: "",
+    price: ""
 });
 
   useEffect(() => {
-    fetch("http://localhost:3000/konyvek")
+    fetch("http://localhost:3000/books")
       .then(res => res.json())
       .then(res => setBooks(res))
       .catch(error => console.error(error));
@@ -28,11 +28,11 @@ function App() {
 
 function resetForm() {
     setNewBook({
-        cim: "",
-        szerzo: "",
-        kiadas_eve: "",
-        kategoria: "",
-        ar: ""
+        title: "",
+        author: "",
+        published_year: "",
+        category: "",
+        price: ""
     });
 
     setEditedId(null);
@@ -40,7 +40,7 @@ function resetForm() {
 }
 
   function onCardDelete(id) {
-    fetch(`http://localhost:3000/konyvek/${id}`, {
+    fetch(`http://localhost:3000/books/${id}`, {
       method: "DELETE"
     })
       .then(() => {
@@ -50,7 +50,7 @@ function resetForm() {
   }
 
   function onCardEdit(id) {
-    fetch(`http://localhost:3000/konyvek/${id}`)
+    fetch(`http://localhost:3000/books/${id}`)
       .then(res => res.json())
       .then(res => {
         setNewBook(res);
@@ -68,8 +68,8 @@ function resetForm() {
   
       fetch(
           isEditing
-              ? `http://localhost:3000/konyvek/${editedId}`
-              : "http://localhost:3000/konyvek",
+              ? `http://localhost:3000/books/${editedId}`
+              : "http://localhost:3000/books",
           {
               method: isEditing ? "PUT" : "POST",
               headers: {
@@ -83,7 +83,6 @@ function resetForm() {
                   const errorText = await res.text();
                   throw new Error(errorText || "Failed to save book");
               }
-            
               return res.json();
           })
           .then(() => {
@@ -130,11 +129,11 @@ function resetForm() {
           {books.map(book => (
             <Card
                 key={book.id}
-                cim={book.cim}
-                szerzo={book.szerzo}
-                kiadas_eve={book.kiadas_eve}
-                kategoria={book.kategoria}
-                ar={book.ar}
+                author={book.author}
+                title={book.title}
+                published_year={book.published_year}
+                category={book.category}
+                price={book.price}
                 onCardDelete={() => onCardDelete(book.id)}
                 onCardEdit={() => onCardEdit(book.id)}
             />

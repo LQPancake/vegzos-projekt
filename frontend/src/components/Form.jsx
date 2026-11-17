@@ -3,56 +3,56 @@ export default function Form({ newBook, setNewBook, submitHandler }) {
         <form onSubmit={submitHandler}>
             <div>
                 <div>
-                    <label htmlFor="cim">Cím:</label>
+                    <label htmlFor="title">Cím:</label>
                     <input
                         type="text"
-                        id="cim"
-                        value={newBook.cim}
-                        onChange={e => setNewBook({...newBook, cim: e.target.value})}
+                        id="title"
+                        value={newBook.title}
+                        onChange={e => setNewBook({...newBook, title: e.target.value})}
                         required
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="szerzo">Szerző:</label>
+                    <label htmlFor="author">Szerző:</label>
                     <input
                         type="text"
-                        id="szerzo"
-                        value={newBook.szerzo}
-                        onChange={e => setNewBook({...newBook, szerzo: e.target.value})}
+                        id="author"
+                        value={newBook.author}
+                        onChange={e => setNewBook({...newBook, author: e.target.value})}
                         required
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="kiadas_eve">Kiadás éve:</label>
+                    <label htmlFor="published_year">Kiadás éve:</label>
                     <input
                         type="number"
-                        id="kiadas_eve"
-                        value={newBook.kiadas_eve}
-                        onChange={e => setNewBook({...newBook, kiadas_eve: e.target.value})}
+                        id="published_year"
+                        value={newBook.published_year}
+                        onChange={e => setNewBook({...newBook, published_year: e.target.value})}
                         required
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="kategoria">Kategória:</label>
+                    <label htmlFor="category">Kategória:</label>
                     <input
                         type="text"
-                        id="kategoria"
-                        value={newBook.kategoria}
-                        onChange={e => setNewBook({...newBook, kategoria: e.target.value})}
+                        id="category"
+                        value={newBook.category}
+                        onChange={e => setNewBook({...newBook, category: e.target.value})}
                         required
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="ar">Ár:</label>
+                    <label htmlFor="price">Ár:</label>
                     <input
                         type="number"
-                        id="ar"
-                        value={newBook.ar}
-                        onChange={e => setNewBook({...newBook, ar: e.target.value})}
+                        id="price"
+                        value={newBook.price}
+                        onChange={e => setNewBook({...newBook, price: e.target.value})}
                         required
                     />
                 </div>

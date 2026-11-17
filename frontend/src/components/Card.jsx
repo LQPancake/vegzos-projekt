@@ -1,20 +1,20 @@
 
 export default function Card({
-    cim,
-    szerzo,
-    kiadas_eve,
-    kategoria,
-    ar,
+    title,
+    author,
+    published_year,
+    category,
+    price,
     onCardDelete,
     onCardEdit
 }) {
     return (
         <div className="card">
-            <h2>{cim}</h2>
-            <p>{szerzo}</p>
-            <p>{kiadas_eve}</p>
-            <p>{kategoria}</p>
-            <p>{ar}</p>
+            <h2>{title}</h2>
+            <p>{author}</p>
+            <p>{published_year}</p>
+            <p>{category}</p>
+            <p>{price}</p>
 
             <p>
                 <button
